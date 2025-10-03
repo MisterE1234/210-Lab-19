@@ -80,6 +80,36 @@ public:
             temp = temp->next;
         }
     }
+
+    void calculateAverageRating() {
+        Review *temp = head;
+        double sum = 0.0;
+        int count = 0;
+
+        if (temp == nullptr){
+            cout << "No reviews available to calculate average rating." << endl;
+            return;
+        }
+
+        while (temp != nullptr){
+            sum += temp->rating;
+            count++;
+            temp = temp->next;
+        }
+
+        double average = sum / count;
+        cout << "Average Rating: " << average << endl;
+    }
+
+    void deleteReviews() {
+        Review *temp = head;
+        while (temp != nullptr){
+            Review *toDelete = temp;
+            temp = temp->next;
+            delete toDelete;
+        }
+        head = nullptr;
+    }
 };
 
 
@@ -90,4 +120,35 @@ int main(){
     double movieRating;
     string movieComment;
     Movie movies[size];
+
+    inFile.open("movies.txt");
+    if (!inFile){
+        cout << "Error opening file." << endl;
+        return 1;
+    }
+
+    for (int i = 0; i < size; i++){
+        getline(inFile, movieTitle);
+        movies[i].setTitle(movieTitle);
+
+        for (int j = 0; j < 3; j++){
+            inFile >> movieRating;
+            inFile.ignore();
+            getline(inFile, movieComment);
+            movies[i].addReview(movieRating, movieComment);
+        }
+    }
+
+    inFile.close();
+
+    for (int i = 0; i < size; i++){
+        cout << "Movie Title: " << movies[i].getTitle() << endl;
+        movies[i].printReviews();
+        movies[i].calculateAverageRating();
+        cout << "----------------------------------------" << endl;
+    }
+
+    for (int i = 0; i < size; i++){
+        movies[i].deleteReviews();
+    }
 }
