@@ -1,9 +1,12 @@
 //COMSC-210|Lab-19|Ethan Aylard
 //IDE used: Visual Studio Code
-//This program uses a Movie class to display different movie review information by using linked lists and an external file.
+//This program uses a Movie class to display different movie review information by using linked lists, an external file, and random ratings.
 
 #include <iostream>
 #include <fstream>
+#include <iomanip>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 struct Review{
@@ -121,24 +124,47 @@ int main(){
     string movieComment;
     Movie movies[size];
 
+    srand((time(0)));
+
+
     inFile.open("movies.txt");
     if (!inFile){
         cout << "Error opening file." << endl;
         return 1;
     }
 
-    for (int i = 0; i < size; i++){
-        getline(inFile, movieTitle);
-        movies[i].setTitle(movieTitle);
+       
+        movies[0].setTitle("Batman Begins");
 
-        for (int j = 0; j < 3; j++){
-            inFile >> movieRating;
-            inFile.ignore();
+        for (int j = 0; j < 5; j++){
+            movieRating = (rand() % 5) + 1; //random rating between 1 and 5
             getline(inFile, movieComment);
-            movies[i].addReview(movieRating, movieComment);
+            movies[0].addReview(movieRating, movieComment);
         }
-    }
 
+        movies[1].setTitle("Inception");
+        for (int j = 0; j < 5; j++){
+            movieRating = (rand() % 5) + 1; //random rating between 1 and 5
+            getline(inFile, movieComment);
+            movies[1].addReview(movieRating, movieComment);
+        }
+
+        movies[2].setTitle("Interstellar");
+        for (int j = 0; j < 5; j++){
+            movieRating = (rand() % 5) + 1; //random rating between 1 and 5
+            getline(inFile, movieComment);
+            movies[2].addReview(movieRating, movieComment);
+        }
+
+        movies[3].setTitle("Tenet");
+        for (int j = 0; j < 5; j++){
+            movieRating = (rand() % 5) + 1; //random rating between 1 and 5
+            getline(inFile, movieComment);
+            movies[3].addReview(movieRating, movieComment);
+        }
+    
+
+    
     inFile.close();
 
     for (int i = 0; i < size; i++){
