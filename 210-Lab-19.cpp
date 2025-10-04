@@ -38,12 +38,12 @@ public:
     //other methods:
     //adds a review to the front of the linked list of reviews.
     void addReview(double r, string c){
-        
+        //Create a new review node.
         Review *newReview = new Review;
         newReview->rating = r;
         newReview->comment = c;
         newReview->next = nullptr;
-
+        //Insert the new review at the front of the list.
         if (head == nullptr){
             head = newReview;
         }
@@ -57,11 +57,12 @@ public:
     void printReviews() {
         Review *temp = head;
         int count = 0;
-     
+        //Check if there are no reviews.
         if (temp == nullptr){
             cout << "No reviews available." << endl;
             return;
         }
+        //Display each review's rating and comment.
         while (temp != nullptr){
             count++;
             cout << fixed << setprecision(1);
@@ -102,6 +103,8 @@ public:
     }
 };
 //function to generate a random double rating between 1.0 and 5.0.
+//requires nothing
+//returns a double
 double getRandomRating() {
     // return a random double in the interval [1.0, 5.0]
     double rating = 1.0 + static_cast<double>(rand()) / RAND_MAX * 4.0; // 1.0 + [0.0,4.0]
@@ -117,17 +120,20 @@ int main(){
     double movieRating;
     string movieComment;
     Movie movies[size];
-
+    //seed random number generator
     srand((time(0)));
 
-
+    //open file
+    //check if file opened correctly
     inFile.open("movies.txt");
     if (!inFile){
         cout << "Error opening file." << endl;
         return 1;
     }
 
-       
+       //Set movie titles and add 3 reviews for each movie from the file with random ratings.
+
+       //Batman Begins:
         movies[0].setTitle("Batman Begins");
 
         for (int j = 0; j < 3; j++){
@@ -137,6 +143,7 @@ int main(){
             movies[0].addReview(movieRating, movieComment);
         }
 
+        //Inception:
         movies[1].setTitle("Inception");
         for (int j = 0; j < 3; j++){
             movieRating = (getRandomRating()); //random double rating between 1 and 5
@@ -144,13 +151,15 @@ int main(){
             movies[1].addReview(movieRating, movieComment);
         }
 
+        //Interstellar:
         movies[2].setTitle("Interstellar");
         for (int j = 0; j < 3; j++){
             movieRating = (getRandomRating()); //random rating between 1 and 5
             getline(inFile, movieComment);
             movies[2].addReview(movieRating, movieComment);
         }
-
+        
+        //Tenet:
         movies[3].setTitle("Tenet");
         for (int j = 0; j < 3; j++){
             movieRating = (getRandomRating()); //random rating between 1 and 5
@@ -159,9 +168,10 @@ int main(){
         }
     
 
-    
+    //close file
     inFile.close();
 
+    //Display each movie's title, reviews, and average rating.
     for (int i = 0; i < size; i++){
         cout << "Movie Title: " << movies[i].getTitle() << endl;
         movies[i].printReviews();
@@ -169,6 +179,7 @@ int main(){
         cout << "----------------------------------------" << endl;
     }
 
+    //Deallocate all dynamic memory used for the reviews linked list for each movie.
     for (int i = 0; i < size; i++){
         movies[i].deleteReviews();
     }
