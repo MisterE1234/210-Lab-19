@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <iomanip>
+
 #include <cstdlib>
 #include <ctime>
 using namespace std;
@@ -115,6 +115,14 @@ public:
     }
 };
 
+double getRandomRating() {
+    double rating;
+    while (rating < 1.0 || rating > 5.0) {
+        rating = static_cast<double>(rand()) / RAND_MAX * 5.0; // Random double between 0.0 and 5.0
+    }
+    return rating;
+}
+
 
 int main(){
     int const size = 4;
@@ -136,29 +144,30 @@ int main(){
        
         movies[0].setTitle("Batman Begins");
 
-        for (int j = 0; j < 5; j++){
-            movieRating = (rand() % 5) + 1; //random rating between 1 and 5
+        for (int j = 0; j < 3; j++){
+            //random double rating between 1 and 5
+            movieRating = (getRandomRating());
             getline(inFile, movieComment);
             movies[0].addReview(movieRating, movieComment);
         }
 
         movies[1].setTitle("Inception");
-        for (int j = 0; j < 5; j++){
-            movieRating = (rand() % 5) + 1; //random rating between 1 and 5
+        for (int j = 0; j < 3; j++){
+            movieRating = (getRandomRating()); //random double rating between 1 and 5
             getline(inFile, movieComment);
             movies[1].addReview(movieRating, movieComment);
         }
 
         movies[2].setTitle("Interstellar");
-        for (int j = 0; j < 5; j++){
-            movieRating = (rand() % 5) + 1; //random rating between 1 and 5
+        for (int j = 0; j < 3; j++){
+            movieRating = (getRandomRating()); //random rating between 1 and 5
             getline(inFile, movieComment);
             movies[2].addReview(movieRating, movieComment);
         }
 
         movies[3].setTitle("Tenet");
-        for (int j = 0; j < 5; j++){
-            movieRating = (rand() % 5) + 1; //random rating between 1 and 5
+        for (int j = 0; j < 3; j++){
+            movieRating = (getRandomRating()); //random rating between 1 and 5
             getline(inFile, movieComment);
             movies[3].addReview(movieRating, movieComment);
         }
