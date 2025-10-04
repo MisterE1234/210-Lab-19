@@ -116,10 +116,8 @@ public:
 };
 
 double getRandomRating() {
-    double rating;
-    while (rating < 1.0 || rating > 5.0) {
-        rating = static_cast<double>(rand()) / RAND_MAX * 5.0; // Random double between 0.0 and 5.0
-    }
+    // return a random double in the interval [1.0, 5.0]
+    double rating = 1.0 + static_cast<double>(rand()) / RAND_MAX * 4.0; // 1.0 + [0.0,4.0]
     return rating;
 }
 
