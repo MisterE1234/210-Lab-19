@@ -22,10 +22,9 @@ private:
 
 public:
 
-    //getters:
+    //getter:
     string getTitle() const {return title;}
-    Review* getReview() const {return head;}
-
+   
     //setters:
     void setTitle(string t) {title = t;}
 
@@ -35,18 +34,6 @@ public:
         head = nullptr;
     }
 
-    Movie(string t){
-        title = t;
-        head = nullptr;
-    }
-
-    Movie(string t, double r, string c){
-        title = t;
-        head = new Review;
-        head->rating = r;
-        head->comment = c;
-        head->next = nullptr;
-    }
 
     //other methods:
     //adds a review to the front of the linked list of reviews.
@@ -66,7 +53,7 @@ public:
             head = newReview;
         }
     }
-
+    //prints all reviews for the movie with the ratings only displaying up to 1 decimal point.
     void printReviews() {
         Review *temp = head;
         int count = 0;
@@ -77,15 +64,14 @@ public:
         }
         while (temp != nullptr){
             count++;
-            fixed;
-            setprecision(1);
+            cout << fixed << setprecision(1);
             cout << "Rating #" << count << ": " << temp->rating << endl;
-            cout << "Comment: " << temp->comment << endl << endl;        
+            cout << "Comment: " << temp->comment << endl << endl;
             temp = temp->next;
         }
     }
 
-    void calculateAverageRating() {
+    void calculateAverageRating(){
         Review *temp = head;
         double sum = 0.0;
         int count = 0;
@@ -115,7 +101,7 @@ public:
         head = nullptr;
     }
 };
-//function to generate a random double rating between 1.0 and 5.0 and with only one decimal place
+//function to generate a random double rating between 1.0 and 5.0.
 double getRandomRating() {
     // return a random double in the interval [1.0, 5.0]
     double rating = 1.0 + static_cast<double>(rand()) / RAND_MAX * 4.0; // 1.0 + [0.0,4.0]
