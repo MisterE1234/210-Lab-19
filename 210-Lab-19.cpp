@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <fstream>
-
+#include <iomanip>
 #include <cstdlib>
 #include <ctime>
 using namespace std;
@@ -77,7 +77,8 @@ public:
         }
         while (temp != nullptr){
             count++;
-
+            fixed;
+            setprecision(1);
             cout << "Rating #" << count << ": " << temp->rating << endl;
             cout << "Comment: " << temp->comment << endl << endl;        
             temp = temp->next;
@@ -114,10 +115,11 @@ public:
         head = nullptr;
     }
 };
-
+//function to generate a random double rating between 1.0 and 5.0 and with only one decimal place
 double getRandomRating() {
     // return a random double in the interval [1.0, 5.0]
     double rating = 1.0 + static_cast<double>(rand()) / RAND_MAX * 4.0; // 1.0 + [0.0,4.0]
+   
     return rating;
 }
 
